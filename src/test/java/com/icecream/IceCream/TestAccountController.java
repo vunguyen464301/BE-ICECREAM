@@ -20,13 +20,13 @@ import com.icecream.IceCream.dto.SigninDTO;
 import com.icecream.IceCream.exception.ApiRequestException;
 import com.icecream.IceCream.model.Account;
 import com.icecream.IceCream.repository.AccountRepository;
-import com.icecream.IceCream.service.AccountService;
+import com.icecream.IceCream.service.impl.AccountServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestAccountController {
 
 	@Mock
-	AccountService accountService;
+	AccountServiceImpl accountService;
 
 	@Mock
 	AccountRepository accountRepository;
@@ -79,7 +79,7 @@ public class TestAccountController {
 		AccountDTO accountDTO = new AccountDTO();
 		accountDTO.setUsername("anhvu1");
 		accountDTO.setPassword("123456");
-		accountService = mock(AccountService.class);
+		accountService = mock(AccountServiceImpl.class);
 		when(accountService.signUp(signinDTO)).thenReturn(accountDTO);
 		AccountDTO signupResult = accountController.signUp(signinDTO);
 		Assert.assertEquals(signupResult.getUsername(), "anhvu1");

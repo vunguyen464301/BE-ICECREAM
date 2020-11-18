@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.icecream.IceCream.dto.FormCreateProductFeedbackDTO;
 import com.icecream.IceCream.dto.ProductFeedbackDTO;
-import com.icecream.IceCream.service.ProductFeedbackService;
+import com.icecream.IceCream.service.impl.ProductFeedbackServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -23,8 +23,8 @@ import com.icecream.IceCream.service.ProductFeedbackService;
 @RestController
 @RequestMapping("/productFeedback")
 public class ProductFeedbackController {	
-	private final ProductFeedbackService productFeedbackService;
-	public ProductFeedbackController(ProductFeedbackService productFeedbackService) {
+	private final ProductFeedbackServiceImpl productFeedbackService;
+	public ProductFeedbackController(ProductFeedbackServiceImpl productFeedbackService) {
 		this.productFeedbackService = productFeedbackService;
 	}
 	

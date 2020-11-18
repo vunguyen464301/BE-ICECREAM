@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.icecream.IceCream.dto.FormCreateOrdersDTO;
 import com.icecream.IceCream.dto.FormUpdateOrdersDTO;
 import com.icecream.IceCream.dto.OrdersDTO;
-import com.icecream.IceCream.service.OrdersService;
+import com.icecream.IceCream.service.impl.OrdersServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -26,9 +26,9 @@ import com.icecream.IceCream.service.OrdersService;
 @RequestMapping("/orders")
 public class OrdersController {
 	
-	private final OrdersService ordersService;
+	private final OrdersServiceImpl ordersService;
 	
-	public OrdersController(OrdersService ordersService) {
+	public OrdersController(OrdersServiceImpl ordersService) {
 		this.ordersService = ordersService;
 	}
 
@@ -57,7 +57,7 @@ public class OrdersController {
 	}
 	
 	@RequestMapping("/find/{id}")
-	public OrdersDTO getPageOrdersByAccountId(@PathVariable(value="id") Long  id) {
+	public OrdersDTO getAllOrdersByAccountId(@PathVariable(value="id") Long  id) {
 		return ordersService.getOrdersByAccountId(id);
 	}
 	

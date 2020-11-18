@@ -18,7 +18,7 @@ import com.icecream.IceCream.dto.UpdateAccountDTO;
 import com.icecream.IceCream.dto.UpdatePasswordDTO;
 import com.icecream.IceCream.model.Account;
 import com.icecream.IceCream.repository.AccountRepository;
-import com.icecream.IceCream.service.AccountService;
+import com.icecream.IceCream.service.impl.AccountServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -26,10 +26,10 @@ import com.icecream.IceCream.service.AccountService;
 @RestController
 @RequestMapping("/account")
 public class AccountController {
-	 private final AccountService accountService;
+	 private final AccountServiceImpl accountService;
 	 private final AccountRepository accountRepository;
 
-	public AccountController(AccountService accountService, AccountRepository accountRepository) {
+	public AccountController(AccountServiceImpl accountService, AccountRepository accountRepository) {
 		this.accountService = accountService;
 		this.accountRepository = accountRepository;
 	}

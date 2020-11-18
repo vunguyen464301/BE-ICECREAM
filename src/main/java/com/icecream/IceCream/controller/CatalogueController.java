@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.icecream.IceCream.dto.CatalogueDTO;
-import com.icecream.IceCream.service.CatalogueService;
+import com.icecream.IceCream.service.impl.CatalogueServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -16,9 +16,9 @@ import com.icecream.IceCream.service.CatalogueService;
 @RestController
 @RequestMapping("/catalogue")
 public class CatalogueController {
-	final private CatalogueService catalogueService;
+	final private CatalogueServiceImpl catalogueService;
 
-	public CatalogueController(CatalogueService catalogueService) {
+	public CatalogueController(CatalogueServiceImpl catalogueService) {
 		this.catalogueService = catalogueService;
 	}
 

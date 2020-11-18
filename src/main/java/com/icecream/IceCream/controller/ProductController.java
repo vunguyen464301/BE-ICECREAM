@@ -18,7 +18,7 @@ import com.icecream.IceCream.dto.FormCreateProductDTO;
 import com.icecream.IceCream.dto.FormUpdateProductDTO;
 import com.icecream.IceCream.dto.ProductDTO;
 import com.icecream.IceCream.model.Product;
-import com.icecream.IceCream.service.ProductService;
+import com.icecream.IceCream.service.impl.ProductServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -26,8 +26,8 @@ import com.icecream.IceCream.service.ProductService;
 @RestController
 @RequestMapping("/product")
 public class ProductController {
-	private final ProductService productService;
-	public ProductController(ProductService productService) {
+	private final ProductServiceImpl productService;
+	public ProductController(ProductServiceImpl productService) {
 		this.productService = productService;
 	}
 	
