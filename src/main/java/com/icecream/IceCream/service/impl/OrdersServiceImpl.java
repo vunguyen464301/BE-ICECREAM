@@ -202,12 +202,9 @@ public class OrdersServiceImpl implements OrdersService {
 	@Override
 	public OrdersDTO getOrdersByAccountId(Long id) {
 		// TODO Auto-generated method stub
-		try {
+	
 			return mappingOrders.convertToOrdersDTO(ordersRepository.findOrdersByAccountId(id));
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw new ApiRequestException("Fail : " + e);
-		}
+	
 	}
 
 }

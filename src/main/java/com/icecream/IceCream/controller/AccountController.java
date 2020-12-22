@@ -1,7 +1,6 @@
 package com.icecream.IceCream.controller;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,11 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.icecream.IceCream.dto.AccountDTO;
 import com.icecream.IceCream.dto.SigninDTO;
 import com.icecream.IceCream.dto.UpdateAccountDTO;
 import com.icecream.IceCream.dto.UpdatePasswordDTO;
-import com.icecream.IceCream.model.Account;
 import com.icecream.IceCream.repository.AccountRepository;
 import com.icecream.IceCream.service.impl.AccountServiceImpl;
 
@@ -26,65 +23,56 @@ import com.icecream.IceCream.service.impl.AccountServiceImpl;
 @RestController
 @RequestMapping("/account")
 public class AccountController {
-	 private final AccountServiceImpl accountService;
-	 private final AccountRepository accountRepository;
+	private final AccountServiceImpl accountService;
 
-	public AccountController(AccountServiceImpl accountService, AccountRepository accountRepository) {
+	public AccountController(AccountServiceImpl accountService) {
 		this.accountService = accountService;
-		this.accountRepository = accountRepository;
 	}
 
 	// find a user
 	// =>Role: Admin or User
 	@RequestMapping("/{username}")
-	public ResponseEntity<AccountDTO> findByUsername(@PathVariable(value = "username") String username) {
-		return ResponseEntity.ok().body(accountService.findByUsername(username));
+	public ResponseEntity<?> findByUsername(@PathVariable(value = "username") String username) {
+		return accountService.findByUsername(username);
 	}
-	
 
 	@RequestMapping("/find/")
-	public Page<AccountDTO> getPageAccountByUsername(@RequestParam String username, @RequestParam long roleId,
+	public ResponseEntity<?> getPageAccountByUsername(@RequestParam String username, @RequestParam long roleId,
 			@RequestParam int page) {
 		return accountService.getPageAccountByUsernameAndRoleId(username, roleId, page);
 	}
 
 	// SignUp
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public AccountDTO signUp(@RequestBody SigninDTO signinDTO) {
-		Account account;
-		account = accountRepository.findByUsername(signinDTO.getUsername());
-		if (account == null) {
-			return accountService.signUp(signinDTO);
-		}
-		return null;
-
+	public ResponseEntity<?> signUp(@RequestBody SigninDTO signinDTO) {
+		return accountService.signUp(signinDTO);
 	}
 
 	// Sign In
 	// =>Role: ...
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
-	public AccountDTO signIn(@RequestBody SigninDTO signinDTO) {
+	public ResponseEntity<?> signIn(@RequestBody SigninDTO signinDTO) {
 		return accountService.signIn(signinDTO);
 	}
 
 	// Update Account
 	// =>Role: Admin, User, Customer
 	@RequestMapping(value = "/password", method = RequestMethod.PUT)
-	public ResponseEntity<AccountDTO> updateAccountPassword(@RequestBody UpdatePasswordDTO updatePasswordDTO) {
-		return ResponseEntity.ok().body(accountService.updateAccountPassword(updatePasswordDTO));
+	public ResponseEntity<?> updateAccountPassword(@RequestBody UpdatePasswordDTO updatePasswordDTO) {
+		return accountService.updateAccountPassword(updatePasswordDTO);
 	}
 
 	// Update Account
 	// =>Role: Admin, User, Customer
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
-	public ResponseEntity<AccountDTO> updateAccount(@RequestBody UpdateAccountDTO updateAccountDTO) {
-		return  ResponseEntity.ok().body(accountService.updateAccount(updateAccountDTO));
+	public ResponseEntity<?> updateAccount(@RequestBody UpdateAccountDTO updateAccountDTO) {
+		return accountService.updateAccount(updateAccountDTO);
 	}
 
 	// Delete Account
 	// =>Role: Admin
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public Boolean deleteAccount(@PathVariable long id) {
+	public ResponseEntity<?> deleteAccount(@PathVariable long id) {
 		return accountService.deleteAccount(id);
 	}
 

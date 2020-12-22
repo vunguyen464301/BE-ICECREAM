@@ -2,7 +2,10 @@ package com.icecream.IceCream.service;
 
 import java.util.Optional;
 
+import javax.xml.ws.Response;
+
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.icecream.IceCream.dto.AccountDTO;
@@ -12,20 +15,22 @@ import com.icecream.IceCream.dto.UpdatePasswordDTO;
 import com.icecream.IceCream.model.Account;
 
 public interface AccountService extends UserDetailsService {
-	Page<AccountDTO> getPageAccountByUsernameAndRoleId(String username, long roleId, int page);
+	ResponseEntity<?> getPageAccountByUsernameAndRoleId(String username, long roleId, int page);
 
-	Optional<Account> findById(Long id);
+	ResponseEntity<?> findById(Long id);
 
 	// sigin or signup
-	AccountDTO findByUsername(String username);
 
-	AccountDTO signIn(SigninDTO signinDTO);
+	ResponseEntity<?> signIn(SigninDTO signinDTO);
 
-	AccountDTO signUp(SigninDTO signinDTO);
+	ResponseEntity<?> signUp(SigninDTO signinDTO);
 
-	AccountDTO updateAccountPassword(UpdatePasswordDTO updatePasswordDTO);
+	ResponseEntity<?> updateAccountPassword(UpdatePasswordDTO updatePasswordDTO);
 
-	AccountDTO updateAccount(UpdateAccountDTO updateAccountDTO);
+	ResponseEntity<?> updateAccount(UpdateAccountDTO updateAccountDTO);
 
-	Boolean deleteAccount(long id);
+	ResponseEntity<?> deleteAccount(long id);
+	
+	ResponseEntity<?> findByUsername(String username);
+	
 }
